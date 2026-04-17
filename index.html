@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>醫學知識庫 | 二尖瓣脫垂案例</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Clinical Case: Cardiology</h1>
+            <p class="subtitle">診斷思維訓練系列</p>
+        </header>
+
+        <section class="case-content">
+            <h2>病例摘要</h2>
+            <p>一名 28 歲女性，主訴偶發性心悸與胸痛。理學檢查發現身材修長、有<strong>蜘蛛指 (Arachnodactyly)</strong> 特徵...</p>
+            
+            <div class="auscultation-box">
+                <h3>聽診重點 (Auscultation)</h3>
+                <ul>
+                    <li>心尖處可聞及 <span class="highlight">Mid-systolic click</span></li>
+                    <li>由蹲姿變站姿時：Click 音提前，雜音增強。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h3>最可能的診斷是？</h3>
+            <div id="options">
+                <button onclick="check(false)">A) 肥厚性心肌病 (HCM)</button>
+                <button onclick="check(true)">B) 二尖瓣脫垂 (MVP)</button>
+                <button onclick="check(false)">C) 主動脈瓣狹窄 (AS)</button>
+            </div>
+            <p id="result"></p>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
