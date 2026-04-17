@@ -1,0 +1,34 @@
+/* 預設隱藏所有案例區塊 */
+.case-section {
+    display: none;
+}
+
+/* 只有加上 .active 標籤的才會顯示 */
+.active {
+    display: block;
+}
+
+/* 詳解區塊預設隱藏 */
+.explanation {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d4edda;
+    border-left: 5px solid #28a745;
+    border-radius: 4px;
+}
+
+.next-btn {
+    background-color: #3498db;
+    color: white;
+    margin-top: 15px;
+    border: none;
+}
+
+.badge {
+    background: #34495e;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
