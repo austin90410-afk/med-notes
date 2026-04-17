@@ -4,42 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>醫學互動案例集</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body { font-family: -apple-system, "Microsoft JhengHei", sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        header { border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+        .badge { background: #34495e; color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8em; }
+        h1 { color: #2c3e50; font-size: 1.5em; margin-top: 10px; }
+        
+        /* 核心關鍵：這行會隱藏所有案例 */
+        .case-section { display: none; }
+        /* 核心關鍵：只有 active 會顯示 */
+        .active { display: block; }
+
+        .highlight { color: #e74c3c; font-weight: bold; border-bottom: 1px solid #e74c3c; }
+        button { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; background: #fff; cursor: pointer; border-radius: 6px; text-align: left; transition: 0.2s; }
+        button:hover { background-color: #f8f9fa; border-color: #3498db; }
+        
+        .explanation { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; }
+        .next-btn { background-color: #3498db; color: white; border: none; text-align: center; font-weight: bold; margin-top: 15px; }
+        .next-btn:hover { background-color: #2980b9; }
+    </style>
+
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div id="case1" class="case-section active">
-            <header>
-                <span class="badge">Case 01</span>
-                <h1>Cardiovascular Case</h1>
-            </header>
-            <section class="content">
-                <p>A 28-year-old female presents with palpitations. On auscultation, a <span class="highlight">mid-systolic click</span> is heard.</p>
-                <button onclick="checkAnswer(1, 'A', 'C')">A) HCM</button>
-                <button onclick="checkAnswer(1, 'B', 'C')">B) AS</button>
-                <button onclick="checkAnswer(1, 'C', 'C')">C) Mitral Valve Prolapse (MVP)</button>
-            </section>
-            <div id="explanation1" class="explanation"></div>
-        </div>
 
-        <div id="case2" class="case-section">
-            <header>
-                <span class="badge">Case 02</span>
-                <h1>Rheumatology Case</h1>
-            </header>
-            <section class="content">
-                <p>A 54-year-old female with symmetrical swelling of <span class="highlight">MCP and PIP</span> joints. Morning stiffness lasts <strong>$>2$ hours</strong>.</p>
-                <p>Lab: Anti-CCP $>200$ U/mL, RF $120$ IU/mL.</p>
-                <button onclick="checkAnswer(2, 'A', 'A')">A) Rheumatoid Arthritis</button>
-                <button onclick="checkAnswer(2, 'B', 'A')">B) Osteoarthritis</button>
-                <button onclick="checkAnswer(2, 'C', 'A')">C) SLE</button>
-            </section>
-            <div id="explanation2" class="explanation"></div>
-        </div>
+<div class="container">
+    <div id="case1" class="case-section active">
+        <header>
+            <span class="badge">Case 01</span>
+            <h1>Cardiovascular Case</h1>
+        </header>
+        <section class="content">
+            <p>A 28-year-old female presents with palpitations. On auscultation, a <span class="highlight">mid-systolic click</span> is heard.</p>
+            <button onclick="checkAnswer(1, 'A', 'C')">A) HCM</button>
+            <button onclick="checkAnswer(1, 'B', 'C')">B) AS</button>
+            <button onclick="checkAnswer(1, 'C', 'C')">C) Mitral Valve Prolapse (MVP)</button>
+        </section>
+        <div id="explanation1" class="explanation"></div>
     </div>
+
+    <div id="case2" class="case-section">
+        <header>
+            <span class="badge">Case 02</span>
+            <h1>Rheumatology Case</h1>
+        </header>
+        <section class="content">
+            <p>A 54-year-old female with symmetrical swelling of <span class="highlight">MCP and PIP</span> joints. Morning stiffness lasts <strong>$>2$ hours</strong>.</p>
+            <p>Lab: Anti-CCP $>200$ U/mL, RF $120$ IU/mL.</p>
+            <button onclick="checkAnswer(2, 'A', 'A')">A) Rheumatoid Arthritis</button>
+            <button onclick="checkAnswer(2, 'B', 'A')">B) Osteoarthritis</button>
+            <button onclick="checkAnswer(2, 'C', 'A')">C) SLE</button>
+        </section>
+        <div id="explanation2" class="explanation"></div>
+    </div>
+</div>
+
+<script>
+// 這裡直接把 JavaScript 也寫進來，確保點擊有反應
+function checkAnswer(caseNum, selected, correct) {
+    const expDiv = document.getElementById('explanation' + caseNum);
+    expDiv.style.display = 'block';
     
-    <script src="script.js"></script>
+    if (selected === correct) {
+        let detailedText = "";
+        if(caseNum === 1) detailedText = "這是典型的 MVP，與馬凡氏症候群有關。";
+        if(caseNum === 2) detailedText = "這是 RA，對稱性小關節受損是關鍵。";
+
+        expDiv.innerHTML = `
+            <div style="background-color: #d4edda; color: #155724; padding: 15px; border-left: 5px solid #28a745;">
+                <strong>✅ 正確！</strong><br>${detailedText}<br>
+                <button class="next-btn" style="text-align:center" onclick="showCase(${caseNum + 1})">挑戰下一題 →</button>
+            </div>`;
+    } else {
+        expDiv.innerHTML = `
+            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-left: 5px solid #dc3545;">
+                <strong>❌ 答錯了！</strong><br>再想想臨床特徵。
+            </div>`;
+    }
+    expDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function showCase(nextNum) {
+    const nextCase = document.getElementById('case' + nextNum);
+    if (!nextCase) {
+        alert("恭喜完成所有案例！");
+        return;
+    }
+    // 隱藏全部，顯示下一題
+    document.querySelectorAll('.case-section').forEach(c => c.classList.remove('active'));
+    nextCase.classList.add('active');
+    window.scrollTo(0, 0);
+}
+</script>
+
 </body>
 </html>
