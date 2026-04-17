@@ -6,23 +6,73 @@
     <title>醫學互動案例集</title>
     
     <style>
-        body { font-family: -apple-system, "Microsoft JhengHei", sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
-        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        header { border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
-        .badge { background: #34495e; color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8em; }
+        body { 
+            font-family: -apple-system, "Microsoft JhengHei", sans-serif; 
+            background-color: #f4f7f6; 
+            color: #333; 
+            line-height: 1.6; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+        }
+        header { 
+            border-bottom: 2px solid #eee; 
+            margin-bottom: 20px; 
+            padding-bottom: 10px; 
+        }
+        .badge { 
+            background: #34495e; 
+            color: white; 
+            padding: 3px 10px; 
+            border-radius: 4px; 
+            font-size: 0.8em; 
+        }
         h1 { color: #2c3e50; font-size: 1.5em; margin-top: 10px; }
         
-        /* 核心關鍵：這行會隱藏所有案例 */
+        /* 核心關鍵：這行會隱藏所有案例區塊 */
         .case-section { display: none; }
-        /* 核心關鍵：只有 active 會顯示 */
-        .active { display: block; }
+        
+        /* 核心關鍵：只有帶有 .active 標籤的案例會顯示出來 */
+        .active { display: block !important; }
 
-        .highlight { color: #e74c3c; font-weight: bold; border-bottom: 1px solid #e74c3c; }
-        button { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; background: #fff; cursor: pointer; border-radius: 6px; text-align: left; transition: 0.2s; }
+        .highlight { color: #e74c3c; font-weight: bold; border-bottom: 1px dotted #e74c3c; }
+        
+        button { 
+            display: block; 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd; 
+            background: #fff; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            text-align: left; 
+            font-size: 1em;
+            transition: 0.2s; 
+        }
         button:hover { background-color: #f8f9fa; border-color: #3498db; }
         
-        .explanation { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; }
-        .next-btn { background-color: #3498db; color: white; border: none; text-align: center; font-weight: bold; margin-top: 15px; }
+        .explanation { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border-radius: 6px; 
+            display: none; /* 預設隱藏詳解 */
+        }
+        .next-btn { 
+            background-color: #3498db; 
+            color: white; 
+            border: none; 
+            text-align: center; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            cursor: pointer;
+        }
         .next-btn:hover { background-color: #2980b9; }
     </style>
 
@@ -52,8 +102,8 @@
             <h1>Rheumatology Case</h1>
         </header>
         <section class="content">
-            <p>A 54-year-old female with symmetrical swelling of <span class="highlight">MCP and PIP</span> joints. Morning stiffness lasts <strong>$>2$ hours</strong>.</p>
-            <p>Lab: Anti-CCP $>200$ U/mL, RF $120$ IU/mL.</p>
+            <p>A 54-year-old female with symmetrical swelling of <span class="highlight">MCP and PIP</span> joints. Morning stiffness lasts <strong>\( > 2 \) hours</strong>.</p>
+            <p>Lab: Anti-CCP \( > 200 \) U/mL, RF \( 120 \) IU/mL.</p>
             <button onclick="checkAnswer(2, 'A', 'A')">A) Rheumatoid Arthritis</button>
             <button onclick="checkAnswer(2, 'B', 'A')">B) Osteoarthritis</button>
             <button onclick="checkAnswer(2, 'C', 'A')">C) SLE</button>
@@ -63,39 +113,60 @@
 </div>
 
 <script>
-// 這裡直接把 JavaScript 也寫進來，確保點擊有反應
+/**
+ * 檢查答案邏輯
+ * @param {number} caseNum - 第幾題
+ * @param {string} selected - 使用者選的選項
+ * @param {string} correct - 正確答案
+ */
 function checkAnswer(caseNum, selected, correct) {
     const expDiv = document.getElementById('explanation' + caseNum);
-    expDiv.style.display = 'block';
+    expDiv.style.display = 'block'; // 顯示解析區塊
     
     if (selected === correct) {
         let detailedText = "";
-        if(caseNum === 1) detailedText = "這是典型的 MVP，與馬凡氏症候群有關。";
-        if(caseNum === 2) detailedText = "這是 RA，對稱性小關節受損是關鍵。";
+        if(caseNum === 1) {
+            detailedText = "這是典型的 MVP（二尖瓣脫垂），常伴隨 Mid-systolic click。這與馬凡氏症候群 (Marfan syndrome) 常伴隨的黏液樣變性有關。";
+        } else if(caseNum === 2) {
+            detailedText = "這是 Rheumatoid Arthritis（類風濕性關節炎）。特徵是對稱性小關節受損，且 Anti-CCP 具有高度特異性。";
+        }
 
         expDiv.innerHTML = `
-            <div style="background-color: #d4edda; color: #155724; padding: 15px; border-left: 5px solid #28a745;">
+            <div style="background-color: #d4edda; color: #155724; padding: 15px; border-left: 5px solid #28a745; border-radius: 4px;">
                 <strong>✅ 正確！</strong><br>${detailedText}<br>
                 <button class="next-btn" style="text-align:center" onclick="showCase(${caseNum + 1})">挑戰下一題 →</button>
             </div>`;
     } else {
         expDiv.innerHTML = `
-            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-left: 5px solid #dc3545;">
-                <strong>❌ 答錯了！</strong><br>再想想臨床特徵。
+            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-left: 5px solid #dc3545; border-radius: 4px;">
+                <strong>❌ 答錯了！</strong><br>提示：請重新觀察病例中的關鍵臨床表現（如：${caseNum === 1 ? 'Mid-systolic click' : 'Morning stiffness > 2 hrs'}）。
             </div>`;
     }
     expDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
+/**
+ * 切換案例邏輯
+ * @param {number} nextNum - 下一題的編號
+ */
 function showCase(nextNum) {
     const nextCase = document.getElementById('case' + nextNum);
     if (!nextCase) {
-        alert("恭喜完成所有案例！");
+        alert("恭喜完成所有案例！祝國考順利！");
         return;
     }
-    // 隱藏全部，顯示下一題
-    document.querySelectorAll('.case-section').forEach(c => c.classList.remove('active'));
+    
+    // 1. 隱藏所有案例
+    const allCases = document.querySelectorAll('.case-section');
+    allCases.forEach(c => c.classList.remove('active'));
+    
+    // 2. 顯示下一題
     nextCase.classList.add('active');
+    
+    // 3. 隱藏前一題的詳解
+    const allExplanations = document.querySelectorAll('.explanation');
+    allExplanations.forEach(e => e.style.display = 'none');
+    
     window.scrollTo(0, 0);
 }
 </script>
